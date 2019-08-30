@@ -1,0 +1,27 @@
+<div class="feed-filters-box">
+  <app-searchbar></app-searchbar>
+  <app-filters></app-filters>
+</div>
+<section *ngIf="comments$" >
+	<article class="feed-card-box" *ngFor="let post of comments$.children" feedHoverCard>
+      <div class="feed-card-score">{{ post.data.score }}</div>
+      <div class="feed-card-content" (click)="selectPost(post)">
+        <div class="feed-card-title">
+            <small>Posted by {{ post.data.author }} {{ (post.data.created * 1000) | date:"dd/MM/yyyy" }}</small>
+            <h1>{{ post.data.title }}</h1>
+        </div>
+        <div *ngIf="post.data.thumbnail !== 'self'" class="card-image">
+          <img [src]="post.data.thumbnail">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content" (click)="selectPost(post)">
+            <p>{{ post.data.title }}</p>
+          </div>
+        </div>
+        <div class="feed-card-btm">
+            <small>{{ post.data.num_comments }} comments</small>
+        </div>
+      </div>
+    </article>
+</section>
+<app-pagination></app-pagination>

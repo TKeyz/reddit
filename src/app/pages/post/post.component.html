@@ -1,0 +1,11 @@
+<div *ngIf="post" class="row">	
+	<div class="col s12 m8 offset-m2">
+		<h2 class="header center">{{ post }}</h2>
+	</div>
+</div>
+<div *ngIf='!post' class="nothing center">
+  <h1>Oups! There's nothing for you here !</h1>
+  <a routerLink="/home">
+    Retourner à l' accueil
+  </a>
+</div>

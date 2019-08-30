@@ -1,0 +1,5 @@
+<nav class="filter-group">
+	<button [ngClass]="{'active': limit$ === 5}" value="5" (click)="onFiltrerLimit(5)">5</button>
+	<button [ngClass]="{'active': limit$ === 10}" value="10" (click)="onFiltrerLimit(10)">10</button>
+	<button [ngClass]="{'active': limit$ === 25}" value="25" (click)="onFiltrerLimit(25)">25</button>
+</nav>

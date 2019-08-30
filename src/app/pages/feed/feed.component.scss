@@ -1,0 +1,45 @@
+.feed-filters-box {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 10px;
+
+	
+}
+.feed-card-box {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
+	font-family: verdana;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px #dddddd;
+	transition: all 1.3s;
+
+	.feed-card-score {
+		display: flex;
+		flex-basis: 15%;
+		align-items: center;
+		justify-content: center;
+		background-color: #b5C0c9;
+	}
+	.feed-card-content {
+		display: flex;
+		cursor: pointer;
+		flex-basis: calc(100vw - 15%);
+		flex-direction: column;
+		align-items: center;
+
+		.feed-card-title,.feed-card-btm {
+			width: 100%;
+			padding: 10px;
+			justify-content: start;
+			box-sizing: border-box;
+		}
+		.feed-card-title {
+			background-color: #e1e1e1;
+		}
+		.feed-card-btm {
+			background-color: #fcfcfc;
+		}
+	}
+}

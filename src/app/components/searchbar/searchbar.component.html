@@ -1,0 +1,4 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+	<input type="text" [(ngModel)]="keyword$" name="search" value="{{keyword$}}" required>
+	<button type="submit" [disabled]="f.invalid">Search</button>
+</form>
