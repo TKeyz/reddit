@@ -10,3 +10,11 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+/*win.loadURL(
+	url.format({
+        pathname: path.join(__dirname, `/../../dist/reddit/index.html`),
+        protocol: "file:",
+        slashes: true
+    })
+);*/

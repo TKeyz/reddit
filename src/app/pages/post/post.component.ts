@@ -16,11 +16,16 @@ export class PostComponent implements OnInit {
 	private comments$: any = [];
 	private keyword$: string;
 	private limit$: number;
+	before$: string;
+	after$: string;
+	post: number;
 
 	ngOnInit(): void {
 		this.FeedService._keyword.subscribe(keyword$ => this.keyword$ = keyword$);
 		this.FeedService._limit.subscribe(limit$ => this.limit$ = limit$);
-		this.FeedService.getComments(this.keyword$, this.limit$).subscribe(res => {
+		this.FeedService._before.subscribe(res => this.before$ = res);
+		this.FeedService._after.subscribe(res => this.after$ = res);
+		this.FeedService.getComments(this.keyword$, this.limit$, this.before$, this.after$).subscribe(res => {
 			this.comments$ = res['data'];
 			let id = +this.route.snapshot.paramMap.get('id');
 			this.comments$.children.forEach((index, i) => {

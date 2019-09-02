@@ -9,27 +9,28 @@ import { Comments } from '../../models/comments.model';
 })
 export class FiltersComponent implements OnInit {
 
-	constructor(public FeedService: FeedService) { }
+	constructor(public FeedService: FeedService) {
+		this.FeedService.statusCheck.subscribe((res: number) => alert('Here '+res));
+	}
 
-	comments$: any;
+	comments$: any = [];
 	keyword$: string;
 	limit$: number;
+	before$: string;
+	after$: string;
 
 	ngOnInit() {
-		this.FeedService._keyword.subscribe(keyword$ => this.keyword$ = keyword$);
-		this.FeedService._limit.subscribe(limit$ => {
-			this.limit$ = limit$;
-		});
-	}
-	private getComments(ref: string, limit: number) {
-		this.FeedService.setLimit(limit);
-		this.FeedService.getComments(ref, limit).subscribe(res => {
-			this.comments$ = res['data'];
-		});
+		this.FeedService._keyword.subscribe(res => this.keyword$ = res);
+		this.FeedService._comments.subscribe(res => this.comments$ = res);
+		this.FeedService._limit.subscribe(res => this.limit$ = res);
+		this.FeedService._before.subscribe(res => this.before$ = res);
+		this.FeedService._after.subscribe(res => this.after$ = res);
 	}
 
-	onFiltrerLimit(limit){
-		this.getComments(this.keyword$, limit);
+	onFiltrerLimit(limit: number){
+		this.FeedService.getComments(this.keyword$, limit, null, this.after$).subscribe(res => {
+			this.FeedService.updateFeed(res, limit, this.before$);
+		});
 	}
 
 }

@@ -16,16 +16,20 @@ export class SearchbarComponent implements OnInit {
 	private comments$: Comments[] = [];
 	keyword$: string;
 	limit$: number;
+	before$: string;
+	after$: string;
 
 	ngOnInit() {
-		this.FeedService._keyword.subscribe(keyword$ => this.keyword$ = keyword$);
-		this.FeedService._limit.subscribe(limit$ => this.limit$ = limit$);
+		this.FeedService._keyword.subscribe(res => this.keyword$ = res);
+		this.FeedService._comments.subscribe(res => this.comments$ = res);
+		this.FeedService._limit.subscribe(res => this.limit$ = res);
+		this.FeedService._before.subscribe(res => this.before$ = res);
+		this.FeedService._after.subscribe(res => this.after$ = res);
 	}
 	onSubmit(form: NgForm){
-	console.log(form.value.search);
 		this.FeedService.setKeyword(this.keyword$);
-		this.FeedService.getComments(this.keyword$, this.limit$).subscribe(comments$ => {
-			this.comments$ = comments$['data'];
+		this.FeedService.getComments(this.keyword$, this.limit$, null, null).subscribe(res => {
+			this.FeedService.updateFeed(res, this.limit$, this.before$);
 		});
 	}
 

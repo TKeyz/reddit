@@ -2,7 +2,7 @@
   <app-searchbar></app-searchbar>
   <app-filters></app-filters>
 </div>
-<section *ngIf="comments$" >
+<section *ngIf="comments$">
 	<article class="feed-card-box" *ngFor="let post of comments$.children" feedHoverCard>
       <div class="feed-card-score">{{ post.data.score }}</div>
       <div class="feed-card-content" (click)="selectPost(post)">
@@ -24,4 +24,7 @@
       </div>
     </article>
 </section>
+<div *ngIf="!comments$">
+  Loading...
+</div>
 <app-pagination></app-pagination>

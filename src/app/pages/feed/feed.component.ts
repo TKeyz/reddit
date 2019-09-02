@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { FeedService } from '../../services/feed.service';
 import { Comments } from '../../models/comments.model';
 import { Post } from '../../models/post.model';
@@ -14,17 +13,22 @@ export class FeedComponent implements OnInit {
 
 	constructor(public FeedService: FeedService, private router: Router) {}
 
-	private comments$: Comments[] = [];
-	private keyword$: string;
-	private limit$: number;
-	private before$: number;
-	private after$: number;
+	comments$: any = [];
+	keyword$: string;
+	limit$: number;
+	before$: string;
+	after$: string;
+	post: number;
 
 	ngOnInit() {
-		this.FeedService._keyword.subscribe(keyword$ => this.keyword$ = keyword$);
-		this.FeedService._limit.subscribe(limit$ => this.limit$ = limit$);
-		this.FeedService.getComments(this.keyword$, this.limit$).subscribe(comments$ => {
-			this.comments$ = comments$['data'];
+		this.FeedService._keyword.subscribe(res => this.keyword$ = res);
+		this.FeedService._limit.subscribe(res => this.limit$ = res);
+		this.FeedService._comments.subscribe(res => this.comments$ = res);
+		this.FeedService._before.subscribe(res => this.before$ = res);
+		this.FeedService._after.subscribe(res => this.after$ = res);
+
+		this.FeedService.getComments(this.keyword$, this.limit$, this.before$, this.after$).subscribe(res => {
+			this.comments$ = this.FeedService.updateFeed(res, this.limit$, this.before$);
 		});
 	}
 	selectPost(post: any): void {
