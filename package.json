@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
     "babelify": "^7.2.0",
-    "browser-sync": "^2.11.1",
+    "browser-sync": "^2.26.7",
     "browserify": "^13.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
